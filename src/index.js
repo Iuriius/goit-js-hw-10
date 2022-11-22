@@ -1,20 +1,33 @@
 import './css/styles.css';
-import Notiflix from 'notiflix';
+import debounce from 'lodash.debounce';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import fetchCountries from "./fetchCountries.js";
 
 const DEBOUNCE_DELAY = 300;
+const countryList = document.querySelector(".country-list");
+const countryCard = document.querySelector(".country-card");
+const searchArea = document.querySelector("#search-box");
 
-fetch('http://restcountries.com/v3.1/${inputName}/')
-    .then(response => {
-        return response.json();
-    })
-    .then(name => {
-        console.log(name);
-    })
-    .catch(error => {
-        console.log(error);
-    })
+searchArea.addEventListener("change", debounce(DEBOUNCE_DELAY, searchQuery));
 
-function createMarkup(arr) {
+function searchQuery() {
+    const searchValue = searchArea.value.trim();
+    fetchCountries(searchValue).then(data => {
+        if (data.length > 10) {
+            tooMany(data)
+        }
+        else if (data.length < 10 & data.length > 1) {
+            countryList(data)
+        }
+        else if (Error) {
+            notFound()
+        } else {
+            countryCard(data)
+        }
+    })
+}
+
+function countryCard(arr) {
     const markup = arr.map(({ flags, name, capital, population, languages }) => {
         return `<div class="card-title">
                     <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
@@ -34,8 +47,23 @@ function createMarkup(arr) {
                 <div class="info">
                     <span class="info-label">Languages:</span>
                     <span class="info-value" data-languages>${Object.values(languages)}</span> 
-                </div >
-            </div>`;
+                </div>`;
     })
 }
-refs.list.innerHTML = markup
+
+function countryList(arr) {
+    const markup = arr.map(({ flags, name }) => {
+        return `<div class="card-title">
+                    <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
+                    <p class="country-name">${name.official}</p>
+                </div>`;
+    })
+}
+
+function notFound() {
+    Notify.failure("Oops, there's no country with that name!")
+}
+
+function tooMany() {
+    Notify.failure("Too many matches found. Please enter a more specific name.")
+}
