@@ -5,7 +5,7 @@ import { fetchCountries } from "./fetchCountries.js";
 
 const DEBOUNCE_DELAY = 300;
 const countryList = document.querySelector(".country-list");
-const countryCard = document.querySelector(".country-card");
+const countryCard = document.querySelector(".country-info");
 const searchArea = document.querySelector("#search-box");
 
 searchArea.addEventListener("change", debounce(searchQuery, DEBOUNCE_DELAY));
