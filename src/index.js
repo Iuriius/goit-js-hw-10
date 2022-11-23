@@ -1,14 +1,14 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import fetchCountries from "./fetchCountries.js";
+import { fetchCountries } from "./fetchCountries.js";
 
 const DEBOUNCE_DELAY = 300;
 const countryList = document.querySelector(".country-list");
 const countryCard = document.querySelector(".country-card");
 const searchArea = document.querySelector("#search-box");
 
-searchArea.addEventListener("change", debounce(DEBOUNCE_DELAY, searchQuery));
+searchArea.addEventListener("change", debounce(searchQuery, DEBOUNCE_DELAY));
 
 function searchQuery() {
     const searchValue = searchArea.value.trim();
@@ -17,17 +17,17 @@ function searchQuery() {
             tooMany(data)
         }
         else if (data.length < 10 & data.length > 1) {
-            countryList(data)
+            countryListF(data)
         }
         else if (Error) {
             notFound()
         } else {
-            countryCard(data)
+            countryCardF(data)
         }
     })
 }
 
-function countryCard(arr) {
+function countryCardF(arr) {
     const markup = arr.map(({ flags, name, capital, population, languages }) => {
         return `<div class="card-title">
                     <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
@@ -51,7 +51,7 @@ function countryCard(arr) {
     })
 }
 
-function countryList(arr) {
+function countryListF(arr) {
     const markup = arr.map(({ flags, name }) => {
         return `<div class="card-title">
                     <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
