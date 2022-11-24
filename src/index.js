@@ -14,15 +14,18 @@ function searchQuery() {
     const searchValue = searchArea.value.trim();
     fetchCountries(searchValue).then(data => {
         if (data.length > 10) {
-            tooMany(data)
+            const markup = tooMany(data)
+            countryList.innerHTML = markup;
         }
         else if (data.length < 10 & data.length > 1) {
-            countryListF(data)
+            const markup = countryListF(data)
+            countryList.innerHTML = markup;
         }
         else if (Error) {
             notFound()
         } else {
-            countryCardF(data)
+            const markup = countryCardF(data)
+            countryCard.innerHTML = markup;
         }
     })
 }
@@ -48,7 +51,7 @@ function countryCardF(arr) {
                     <span class="info-label">Languages:</span>
                     <span class="info-value" data-languages>${Object.values(languages)}</span> 
                 </div>`;
-    })
+    }).join('')
 }
 
 function countryListF(arr) {
@@ -57,7 +60,7 @@ function countryListF(arr) {
                     <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
                     <p class="country-name">${name.official}</p>
                 </div>`;
-    })
+    }).join('')
 }
 
 function notFound() {
