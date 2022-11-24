@@ -13,19 +13,26 @@ searchArea.addEventListener("input", debounce(searchQuery, DEBOUNCE_DELAY));
 function searchQuery() {
     const searchValue = searchArea.value.trim();
     fetchCountries(searchValue).then(data => {
-        if (data.length > 10) {
+        if (data.length >= 10) {
             const markup = tooMany(data)
-            countryList.innerHTML = markup;
+            countryList.innerHTML = "";
+            console.log(markup);
+            countryCard.innerHTML = "";
         }
-        else if (data.length < 10 & data.length > 1) {
+        else if (data.length < 10 && data.length > 1) {
             const markup = countryListF(data)
             countryList.innerHTML = markup;
+            console.log(markup);
+            countryCard.innerHTML = "";
         }
-        else if (Error) {
-            notFound()
-        } else {
+        else if (data.length = 1) {
             const markup = countryCardF(data)
             countryCard.innerHTML = markup;
+            countryList.innerHTML = "";
+        }
+        else (Error) => {
+            notFound()
+            countryList.innerHTML = "";
         }
     })
 }
@@ -33,7 +40,7 @@ function searchQuery() {
 function countryCardF(arr) {
     return arr.map(({ flags, name, capital, population, languages }) => {
         return `<div class="card-title">
-                    <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
+                    <img class="country-card-flag" src='${flags.svg}' alt='${name} flag' width="300"> 
                     <p class="country-name">${name.official}</p>
                 <div>
 
@@ -57,7 +64,7 @@ function countryCardF(arr) {
 function countryListF(arr) {
     return arr.map(({ flags, name }) => {
         return `<div class="card-title">
-                    <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
+                    <img class="country-card-flag" src='${flags.svg}' alt='${name} flag' width="100"> 
                     <p class="country-name">${name.official}</p>
                 </div>`;
     })
