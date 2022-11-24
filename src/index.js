@@ -31,7 +31,7 @@ function searchQuery() {
 }
 
 function countryCardF(arr) {
-    const markup = arr.map(({ flags, name, capital, population, languages }) => {
+    return arr.map(({ flags, name, capital, population, languages }) => {
         return `<div class="card-title">
                     <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
                     <p class="country-name">${name.official}</p>
@@ -51,16 +51,16 @@ function countryCardF(arr) {
                     <span class="info-label">Languages:</span>
                     <span class="info-value" data-languages>${Object.values(languages)}</span> 
                 </div>`;
-    }).join('')
+    })
 }
 
 function countryListF(arr) {
-    const markup = arr.map(({ flags, name }) => {
+    return arr.map(({ flags, name }) => {
         return `<div class="card-title">
                     <img class="country-card-flag" src='${flags.svg}' alt='${name} flag'> 
                     <p class="country-name">${name.official}</p>
                 </div>`;
-    }).join('')
+    })
 }
 
 function notFound() {
