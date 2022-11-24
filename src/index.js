@@ -8,7 +8,7 @@ const countryList = document.querySelector(".country-list");
 const countryCard = document.querySelector(".country-info");
 const searchArea = document.querySelector("#search-box");
 
-searchArea.addEventListener("change", debounce(searchQuery, DEBOUNCE_DELAY));
+searchArea.addEventListener("input", debounce(searchQuery, DEBOUNCE_DELAY));
 
 function searchQuery() {
     const searchValue = searchArea.value.trim();
