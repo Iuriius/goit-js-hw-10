@@ -64,7 +64,7 @@ function countryCardF(arr) {
 function countryListF(arr) {
     return arr.map(({ flags, name }) => {
         return `<div class="card-title">
-                    <img class="country-card-flag" src='${flags.svg}' alt='${name} flag' width="100"> 
+                    <img class="country-card-flag" src='${flags.svg}' alt='${name} flag' width="50"> 
                     <p class="country-name">${name.official}</p>
                 </div>`;
     })
