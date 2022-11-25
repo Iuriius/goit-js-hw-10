@@ -74,5 +74,5 @@ function notFound() {
 }
 
 function tooMany() {
-    Notify.failure("Too many matches found. Please enter a more specific name.");
+    Notify.info("Too many matches found. Please enter a more specific name.");
 }
