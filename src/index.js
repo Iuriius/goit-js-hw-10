@@ -38,6 +38,8 @@ function searchQuery() {
             countryList.innerHTML = "";
             countryCard.innerHTML = "";
         }
+    }).catch(() => {
+        Notify.failure("Oops!");
     })
 }
 
