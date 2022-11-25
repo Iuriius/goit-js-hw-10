@@ -12,7 +12,11 @@ searchArea.addEventListener("input", debounce(searchQuery, DEBOUNCE_DELAY));
 
 function searchQuery() {
     const searchValue = searchArea.value.trim();
-    if (!searchValue) return
+    if (!searchValue) {
+        countryCard.innerHTML = "";
+        countryList.innerHTML = "";
+        return
+    }
     fetchCountries(searchValue).then(data => {
         if (data.length > 10) {
             tooMany(data)
