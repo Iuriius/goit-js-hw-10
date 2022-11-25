@@ -5,7 +5,7 @@ export function fetchCountries(name) {
     return fetch(`${BASE_URL}${name}?fields=${filters}`)
         .then(response => {
             if (!response.ok) {
-                throw new Error(response.statusText)
+                throw new Error("Something went wrong")
             }
             return response.json();
         })
