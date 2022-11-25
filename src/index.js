@@ -23,7 +23,7 @@ function searchQuery() {
             countryList.innerHTML = markup;
             countryCard.innerHTML = "";
         }
-        else if (data.length = 1) {
+        else if (data.length === 1) {
             const markup = countryCardF(data)
             countryCard.innerHTML = markup;
             countryList.innerHTML = "";
