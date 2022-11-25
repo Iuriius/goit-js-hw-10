@@ -14,9 +14,9 @@ function searchQuery() {
     const searchValue = searchArea.value.trim();
     fetchCountries(searchValue).then(data => {
         if (data.length >= 10) {
-            const markup = tooMany(data)
-            countryList.innerHTML = "";
+            tooMany(data)
             countryCard.innerHTML = "";
+            countryList.innerHTML = "";
         }
         else if (data.length < 10 && data.length > 1) {
             const markup = countryListF(data)
@@ -29,7 +29,7 @@ function searchQuery() {
             countryList.innerHTML = "";
         }
         else {
-            const markup = notFound(data)
+            notFound(data)
             countryList.innerHTML = "";
             countryCard.innerHTML = "";
         }
