@@ -38,8 +38,11 @@ function searchQuery() {
             countryList.innerHTML = "";
             countryCard.innerHTML = "";
         }
-    }).catch(() => {
+    }).catch((error) => {
+      console.log(error)
         Notify.failure("Oops!");
+       countryList.innerHTML = "";
+            countryCard.innerHTML = "";
     })
 }
 
