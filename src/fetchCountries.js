@@ -9,5 +9,5 @@ export function fetchCountries(name) {
             }
             return response.json();
         })
-
+        .catch(err => console.log(err))
 };
